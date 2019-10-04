@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Autókölcsönző</title>
+    <title>Autó hozzáadása | Autókölcsönző</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
           integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/edit.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,6 +38,31 @@
     </div>
 </nav>
 <div class="container">
+    <div class="edit-car-container">
+        <div class="title my-4">
+            <h1>Autó hozzáadása</h1>
+        </div>
+        <form class="edit-form" action="cars.html">
+            <div class="form-card">
+                <div class="form-group">
+                    <label for="model">Modell</label>
+                    <input type="text" class="form-control" id="model" placeholder="Modell">
+                </div>
+                <div class="form-group">
+                    <label for="year">Gyártás éve</label>
+                    <input type="text" class="form-control" id="year" placeholder="Gyártás éve">
+                </div>
+                <div class="form-group">
+                    <label for="plate-number">Rendszám</label>
+                    <input type="text" class="form-control" id="plate-number" placeholder="Rendszám">
+                </div>
+            </div>
+            <div class="actions my-3">
+                <button type="button" class="btn btn-light mr-3" onclick="history.back()">Mégse</button>
+                <button type="submit" class="btn btn-primary">Mentés</button>
+            </div>
+        </form>
+    </div>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

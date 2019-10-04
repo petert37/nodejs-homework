@@ -1,0 +1,9 @@
+@import "common.css";
+
+.table td.actions {
+    width: 120px;
+}
+
+.table.table-hover tbody tr {
+    cursor: pointer;
+}
