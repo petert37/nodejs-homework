@@ -1,7 +1,7 @@
 /*
-* Changes the password of the given user to the given value, then redirects to '/login'
+* Changes the password of the given user to the given value
 */
-module.exports = (req, res, next) => {
+module.exports = (objectRepository) => (req, res, next) => {
     next();
 };
 

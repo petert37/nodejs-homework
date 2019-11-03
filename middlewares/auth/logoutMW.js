@@ -1,7 +1,7 @@
 /*
-* Signs out the user, then redirects to '/'
+* Signs out the user
 */
-module.exports = (req, res, next) => {
+module.exports = (objectRepository) => (req, res, next) => {
     next();
 };
 

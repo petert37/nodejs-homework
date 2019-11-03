@@ -1,8 +1,9 @@
 /*
 * Deletes the client with the specified id from the database.
-* Redirects to /clients on success
 */
-module.exports = (req, res, next) => {
+const requireOption = require('../requireOption');
+
+module.exports = (objectRepository) => (req, res, next) => {
     next();
 };
 

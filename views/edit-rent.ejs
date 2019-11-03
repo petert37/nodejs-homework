@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('header') -%>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+<%- include('menu') -%>
+<div class="container">
+    <div class="edit-car-container">
+        <div class="title my-4">
+            <h1>
+                <% if (typeof rent === "undefined") { %>
+                    Új kölcsönzés
+                <% } else { %>
+                    Kölcsönzés módosítása
+                <% } %>
+            </h1>
+        </div>
+        <form class="edit-form" method="post">
+            <div class="form-card">
+                <div class="form-group">
+                    <div>Autó</div>
+                    <div><%= car.model %> - <%= car.plateNumber %></div>
+                    <input type="hidden" name="carId" value="<%= car._id %>">
+                </div>
+                <div class="form-group">
+                    <div>Ügyfél</div>
+                    <div>
+                        <% if (typeof clientInstance === "undefined") { %>
+                            <button class="no-style-button text-body" type="submit" name="pickClient">Ügyfél választása</button>
+                        <% } else { %>
+                            <button class="no-style-button text-body" type="submit" name="pickClient"><%= clientInstance.name %></button>
+                            <input type="hidden" name="clientId" value="<%= clientInstance._id %>">
+                        <% } %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="start-time">Kölcsönzés kezdete</label>
+                    <input type="text" class="form-control" id="start-time" placeholder="Dátum, pl: 2019-10-04 09:00"
+                           value="<%= (typeof rent === "undefined") ? "" : rent.startDate %>">
+                </div>
+                <div class="form-group">
+                    <label for="end-time">Kölcsönzés vége</label>
+                    <input type="text" class="form-control" id="end-time" placeholder="Dátum, pl: 2019-10-15 17:35"
+                           value="<%= (typeof rent === "undefined") ? "" : rent.endDate %>">
+                </div>
+            </div>
+            <div class="actions my-3">
+                <button type="submit" class="btn btn-light mr-3" name="cancel">Mégse</button>
+                <button type="submit" class="btn btn-primary" name="saveRent">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('footer') -%>
+</body>
+</html>

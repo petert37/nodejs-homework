@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('header') -%>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+<%- include('menu') -%>
+<div class="container">
+    <div class="edit-car-container">
+        <div class="title my-4">
+            <h1>
+                <% if (typeof car === "undefined") { %>
+                    Autó hozzáadása
+                <% } else { %>
+                    Autó módosítása
+                <% } %>
+            </h1>
+        </div>
+        <form class="edit-form" method="post">
+            <div class="form-card">
+                <div class="form-group">
+                    <label for="model">Modell</label>
+                    <input type="text" class="form-control" id="model" placeholder="Modell"
+                           value="<%= (typeof car === "undefined") ? "" : car.model %>">
+                </div>
+                <div class="form-group">
+                    <label for="year">Gyártás éve</label>
+                    <input type="text" class="form-control" id="year" placeholder="Gyártás éve"
+                           value="<%= (typeof car === "undefined") ? "" : car.year %>">
+                </div>
+                <div class="form-group">
+                    <label for="plate-number">Rendszám</label>
+                    <input type="text" class="form-control" id="plate-number" placeholder="Rendszám"
+                           value="<%= (typeof car === "undefined") ? "" : car.plateNumber %>">
+                </div>
+            </div>
+            <div class="actions my-3">
+                <button type="submit" class="btn btn-light mr-3" name="cancel">Mégse</button>
+                <button type="submit" class="btn btn-primary">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('footer') -%>
+</body>
+</html>

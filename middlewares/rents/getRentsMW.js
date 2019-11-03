@@ -1,7 +1,13 @@
 /*
 * Loads the list of rents from the database
 */
-module.exports = (req, res, next) => {
+const requireOption = require('../requireOption');
+
+module.exports = (objectRepository) => (req, res, next) => {
+
+    const RentModel = requireOption(objectRepository, "RentModel");
+    res.locals.rents = RentModel.getRents();
+
     next();
 };
 

@@ -1,7 +1,13 @@
 /*
 * Loads the list of cars from the database
 */
-module.exports = (req, res, next) => {
+const requireOption = require('../requireOption');
+
+module.exports = (objectRepository) => (req, res, next) => {
+
+    const CarModel = requireOption(objectRepository, "CarModel");
+    res.locals.cars = CarModel.getCars();
+
     next();
 };
 

@@ -1,7 +1,13 @@
 /*
 * Loads the list of clients from the database
 */
-module.exports = (req, res, next) => {
+const requireOption = require('../requireOption');
+
+module.exports = (objectRepository) => (req, res, next) => {
+
+    const ClientModel = requireOption(objectRepository, "ClientModel");
+    res.locals.clients = ClientModel.getClients();
+
     next();
 };
 

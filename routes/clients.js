@@ -1,18 +1,22 @@
 const express = require("express");
 
 const renderMW = require("../middlewares/renderMW");
+const redirectMW = require("../middlewares/redirectMW");
 const getClientMW = require("../middlewares/clients/getClientMW");
 const getClientsMW = require("../middlewares/clients/getClientsMW");
 const saveClientMW = require("../middlewares/clients/saveClientMW");
 const deleteClientMW = require("../middlewares/clients/deleteClientMW");
+const buttonRedirectMW = require("../middlewares/buttonRedirectMW");
 
-const router = express.Router();
+module.exports = (objectRepository) => {
+    const router = express.Router();
 
-router.get("/", getClientsMW, renderMW("/clients.html"));
-router.get("/new", renderMW("/edit-client.html"));
-router.post("/new", saveClientMW, renderMW("/clients.html"));
-router.get("/edit/:clientId", getClientMW, renderMW("/edit-client.html"));
-router.post("/edit/:clientId", getClientMW, saveClientMW, renderMW("/clients.html"));
-router.delete("/delete/:clientId", getClientsMW, deleteClientMW, renderMW("/clients.html"));
+    router.get("/", getClientsMW(objectRepository), renderMW(objectRepository, "clients"));
+    router.get("/new", renderMW(objectRepository, "edit-client"));
+    router.post("/new", buttonRedirectMW(objectRepository, "cancel", "/clients"), saveClientMW(objectRepository), redirectMW(objectRepository, "/clients"));
+    router.get("/edit/:clientId", getClientMW(objectRepository), renderMW(objectRepository, "edit-client"));
+    router.post("/edit/:clientId", buttonRedirectMW(objectRepository, "cancel", "/clients"), getClientMW(objectRepository), saveClientMW(objectRepository), redirectMW(objectRepository, "/clients"));
+    router.post("/delete/:clientId", getClientsMW(objectRepository), deleteClientMW(objectRepository), redirectMW(objectRepository, "/clients"));
 
-module.exports = router;
+    return router;
+};

@@ -1,5 +1,5 @@
 /*
-* Deletes the car with the specified id from the database.
+* Saves the selected client
 */
 const requireOption = require('../requireOption');
 

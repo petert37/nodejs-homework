@@ -21,3 +21,15 @@ body {
 .table .actions i {
     cursor: pointer;
 }
+
+.table td.actions > form {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.no-style-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}

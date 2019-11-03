@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('header') -%>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+<%- include('menu') -%>
+<div class="container">
+    <div class="edit-car-container">
+        <div class="title my-4">
+            <h1>
+                <% if (typeof clientInstance === "undefined") { %>
+                    Ügyfél hozzáadása
+                <% } else { %>
+                    Ügyfél módosítása
+                <% } %>
+            </h1>
+        </div>
+        <form class="edit-form" method="post">
+            <div class="form-card">
+                <div class="form-group">
+                    <label for="name">Név</label>
+                    <input type="text" autocomplete="name" class="form-control" id="name" placeholder="Név"
+                           value="<%= (typeof clientInstance === "undefined") ? "" : clientInstance.name %>">
+                </div>
+                <div class="form-group">
+                    <label for="phone-number">Telefonszám</label>
+                    <input type="text" autocomplete="tel" class="form-control" id="phone-number" placeholder="Telefonszám"
+                           value="<%= (typeof clientInstance === "undefined") ? "" : clientInstance.phone %>">
+                </div>
+            </div>
+            <div class="actions my-3">
+                <button type="submit" class="btn btn-light mr-3" name="cancel">Mégse</button>
+                <button type="submit" class="btn btn-primary">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('footer') -%>
+</body>
+</html>

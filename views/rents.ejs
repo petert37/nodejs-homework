@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('header') -%>
+    <link rel="stylesheet" href="/css/rents.css">
+</head>
+<body>
+<%- include('menu') -%>
+<div class="container">
+    <div class="title d-flex align-items-center justify-content-between my-4">
+        <h1>Kölcsönzések</h1>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Autó</th>
+            <th scope="col">Dátum</th>
+            <th scope="col">Ügyfél</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% rents.forEach(rent => { %>
+            <tr>
+                <td><%= rent.car.model %> - <%= rent.car.plateNumber %></td>
+                <td><%= rent.rent.startDate %> - <%= rent.rent.endDate %></td>
+                <td><%= rent.client.name %></td>
+                <td class="actions">
+                    <form action="/rents/edit/<%= rent.rent._id %>" method="get">
+                        <button class="no-style-button" type="submit">
+                            <i class="fas fa-edit fa-fw ml-2"></i>
+                        </button>
+                    </form>
+                    <form action="/rents/delete/<%= rent.rent._id %>" method="post">
+                        <button class="no-style-button" type="submit">
+                            <i class="fas fa-trash fa-fw mx-2"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('footer') -%>
+</body>
+</html>

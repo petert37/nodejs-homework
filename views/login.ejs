@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <%- include('header') -%>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div class="title">
+    <h1>Autókölcsönző</h1>
+</div>
+<div class="login-box">
+    <div class="login-title">
+        <h1>Bejelentkezés</h1>
+        <a class="text-body font-weight-bold" href="/register">Regisztráció</a>
+    </div>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <input type="text" autocomplete="username" class="form-control" id="username" placeholder="Felhasználónév">
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="password">Jelszó</label>
+                <button type="submit" class="no-style-button forgot-password text-body" name="forgot-password">Elfelejtett jelszó</button>
+            </div>
+            <input type="password" autocomplete="current-password" class="form-control" id="password" placeholder="Jelszó">
+        </div>
+        <button type="submit" class="btn btn-primary" name="login">Bejelentkezés</button>
+    </form>
+</div>
+<div class="placeholder"></div>
+<%- include('footer') -%>
+</body>
+</html>
