@@ -1,0 +1,1 @@
+module.exports.secret = "e1Lom1DiqyqvoLKJJcbl";

@@ -1,29 +1,33 @@
+const Schema = require("mongoose").Schema;
+const db = require("../config/db");
+
+const ClientDBModel = db.model("Client", {
+    name: String,
+    phone: String
+});
+
+function newClient() {
+    return new ClientDBModel();
+}
+
 function getClient(id) {
-    return {
-        _id: id,
-        name: "Tóth Péter",
-        phone: "+36 30 123 4567"
-    }
+    return ClientDBModel.findById(id);
 }
 
 function getClients() {
-    return [
-        getClient(1),
-        getClient(2),
-        getClient(3),
-        getClient(4),
-    ]
+    return ClientDBModel.find();
 }
 
 function saveClient(client) {
-
+    return client.save();
 }
 
 function deleteClient(client) {
-
+    return client.remove();
 }
 
 module.exports = {
+    newClient,
     getClient,
     getClients,
     saveClient,

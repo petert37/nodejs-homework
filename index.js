@@ -4,23 +4,24 @@ const session = require("express-session");
 
 const logRequestMW = require("./middlewares/logRequestMW");
 const setUpRoutes = require("./routes/index");
+const {secret} = require("./config/session");
 
 const app = express();
 
-app.use(logRequestMW);
-
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static("static"));
 
 app.use(
     session({
-        secret: "e1Lom1DiqyqvoLKJJcbl",
+        secret: secret,
         resave: false,
         saveUninitialized: false
     })
 );
+
+app.use(logRequestMW);
 
 setUpRoutes(app);
 

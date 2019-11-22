@@ -1,30 +1,33 @@
+const db = require("../config/db");
+
+const CarDBModel = db.model("Car", {
+    model: String,
+    year: Number,
+    plateNumber: String
+});
+
+function newCar() {
+    return new CarDBModel();
+}
+
 function getCar(id) {
-    return {
-        _id: id,
-        model: "Opel Astra",
-        year: 2006,
-        plateNumber: "ABC-123"
-    }
+    return CarDBModel.findById(id);
 }
 
 function getCars() {
-    return [
-        getCar(1),
-        getCar(2),
-        getCar(3),
-        getCar(4),
-    ]
+    return CarDBModel.find();
 }
 
 function saveCar(car) {
-
+    return car.save();
 }
 
 function deleteCar(car) {
-
+    return car.remove();
 }
 
 module.exports = {
+    newCar,
     getCar,
     getCars,
     saveCar,

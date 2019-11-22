@@ -22,9 +22,9 @@
         <tbody>
         <% rents.forEach(rent => { %>
             <tr>
-                <td><%= rent.car.model %> - <%= rent.car.plateNumber %></td>
-                <td><%= rent.rent.startDate %> - <%= rent.rent.endDate %></td>
-                <td><%= rent.client.name %></td>
+                <td><%= (rent.car != null) ? rent.car.model : "TÖRÖLT" %> - <%= (rent.car != null) ? rent.car.plateNumber : "" %></td>
+                <td><%= rent.formattedStartDate %> - <%= rent.formattedEndDate %></td>
+                <td><%= (rent.client != null) ? rent.client.name : "TÖRÖLT" %></td>
                 <td class="actions">
                     <form action="/rents/edit/<%= rent.rent._id %>" method="get">
                         <button class="no-style-button" type="submit">

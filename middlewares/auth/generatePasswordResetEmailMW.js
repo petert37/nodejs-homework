@@ -3,6 +3,7 @@
 */
 module.exports = (objectRepository) => (req, res, next) => {
 
+    //TODO
     res.locals.username = "Peti";
     res.locals.passwordResetToken = req.query.token;
 

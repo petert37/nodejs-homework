@@ -21,13 +21,16 @@
             <div class="form-card">
                 <div class="form-group">
                     <div>Autó</div>
-                    <div><%= car.model %> - <%= car.plateNumber %></div>
-                    <input type="hidden" name="carId" value="<%= car._id %>">
+                    <div><%= (typeof car !== "undefined" && car != null) ? car.model : "TÖRÖLT" %>
+                        - <%= (typeof car !== "undefined" && car != null) ? car.plateNumber : "" %></div>
+                    <% if (typeof car !== "undefined" && car != null) { %>
+                        <input type="hidden" name="carId" value="<%= car._id %>">
+                    <% } %>
                 </div>
                 <div class="form-group">
                     <div>Ügyfél</div>
                     <div>
-                        <% if (typeof clientInstance === "undefined") { %>
+                        <% if (typeof clientInstance === "undefined" || clientInstance == null) { %>
                             <button class="no-style-button text-body" type="submit" name="pickClient">Ügyfél választása</button>
                         <% } else { %>
                             <button class="no-style-button text-body" type="submit" name="pickClient"><%= clientInstance.name %></button>
@@ -37,13 +40,13 @@
                 </div>
                 <div class="form-group">
                     <label for="start-time">Kölcsönzés kezdete</label>
-                    <input type="text" class="form-control" id="start-time" placeholder="Dátum, pl: 2019-10-04 09:00"
-                           value="<%= (typeof rent === "undefined") ? "" : rent.startDate %>">
+                    <input type="text" class="form-control" id="start-time" placeholder="Dátum, pl: 2019-10-04 09:00" name="startDate"
+                           value="<%= (typeof rentDetails !== "undefined" && typeof rentDetails.startDate !== "undefined") ? rentDetails.startDate : ((typeof rent === "undefined") ? "" : formattedStartDate) %>">
                 </div>
                 <div class="form-group">
                     <label for="end-time">Kölcsönzés vége</label>
-                    <input type="text" class="form-control" id="end-time" placeholder="Dátum, pl: 2019-10-15 17:35"
-                           value="<%= (typeof rent === "undefined") ? "" : rent.endDate %>">
+                    <input type="text" class="form-control" id="end-time" placeholder="Dátum, pl: 2019-10-15 17:35" name="endDate"
+                           value="<%= (typeof rentDetails !== "undefined" && typeof rentDetails.endDate !== "undefined") ? rentDetails.endDate : ((typeof rent === "undefined") ? "" : formattedEndDate) %>">
                 </div>
             </div>
             <div class="actions my-3">

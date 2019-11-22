@@ -4,6 +4,7 @@
 */
 module.exports = (objectRepository) => (req, res, next) => {
 
+    //TODO
     res.locals.passwordResetToken = req.query.token;
 
     next();

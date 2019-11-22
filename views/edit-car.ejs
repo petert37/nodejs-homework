@@ -21,17 +21,17 @@
             <div class="form-card">
                 <div class="form-group">
                     <label for="model">Modell</label>
-                    <input type="text" class="form-control" id="model" placeholder="Modell"
+                    <input type="text" class="form-control" id="model" placeholder="Modell" name="model"
                            value="<%= (typeof car === "undefined") ? "" : car.model %>">
                 </div>
                 <div class="form-group">
                     <label for="year">Gyártás éve</label>
-                    <input type="text" class="form-control" id="year" placeholder="Gyártás éve"
+                    <input type="text" class="form-control" id="year" placeholder="Gyártás éve" name="year"
                            value="<%= (typeof car === "undefined") ? "" : car.year %>">
                 </div>
                 <div class="form-group">
                     <label for="plate-number">Rendszám</label>
-                    <input type="text" class="form-control" id="plate-number" placeholder="Rendszám"
+                    <input type="text" class="form-control" id="plate-number" placeholder="Rendszám" name="plateNumber"
                            value="<%= (typeof car === "undefined") ? "" : car.plateNumber %>">
                 </div>
             </div>

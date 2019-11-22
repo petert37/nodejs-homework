@@ -5,7 +5,9 @@
 */
 module.exports = (objectRepository) => (req, res, next) => {
 
-    if (typeof req.body["forgot-password"] !== "undefined") {
+    //TODO
+
+    if (typeof req.body !== "undefined" && typeof req.body["forgot-password"] !== "undefined") {
         const token = "kalsjdhf68d7fg6576d5fdf8gh768ui765n4b65d46sd8fgg"; //TODO
         return res.redirect(`/forgot-password-email?token=${token}`);
     }

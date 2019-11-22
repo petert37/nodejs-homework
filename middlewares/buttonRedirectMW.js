@@ -3,7 +3,7 @@
  */
 module.exports = (objectRepository, inputName, redirectRoute) => (req, res, next) => {
 
-    if (typeof req.body[inputName] !== "undefined") {
+    if (typeof req.body !== "undefined" && typeof req.body[inputName] !== "undefined") {
         const route = typeof redirectRoute === "function" ? redirectRoute(req, res) : redirectRoute;
         return res.redirect(route);
     }
