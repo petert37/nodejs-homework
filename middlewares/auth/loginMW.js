@@ -23,7 +23,11 @@ module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
 
         res.locals.username = req.session.username;
     } catch (e) {
-        return next(e);
+        if (e === "User not found" || e === "Invalid password") {
+            res.locals.error = e;
+        } else {
+            return next(e);
+        }
     }
 
     next();

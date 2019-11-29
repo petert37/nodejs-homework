@@ -13,6 +13,17 @@ module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
         typeof req.body.name === "undefined" ||
         typeof req.body.phone === "undefined"
     ) {
+        res.locals.error = "Invalid input data";
+        return next();
+    }
+
+    if (req.body.name.length === 0) {
+        res.locals.error = "Invalid name";
+        return next();
+    }
+
+    if (req.body.phone.length === 0) {
+        res.locals.error = "Invalid phone number";
         return next();
     }
 

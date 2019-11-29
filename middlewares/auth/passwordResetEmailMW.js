@@ -3,15 +3,22 @@
 * Generates a password reset token for the provided username and redirects to the reset email page
 * In a real application, this would be sent to the user in an email, but here it just gets displayed
 */
-module.exports = (objectRepository) => (req, res, next) => {
+const requireOption = require('../requireOption');
+const wrapAsync = require('../wrapAsyncMW');
 
-    //TODO
+module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
 
-    if (typeof req.body !== "undefined" && typeof req.body["forgot-password"] !== "undefined") {
-        const token = "kalsjdhf68d7fg6576d5fdf8gh768ui765n4b65d46sd8fgg"; //TODO
-        return res.redirect(`/forgot-password-email?token=${token}`);
+    const UserModel = requireOption(objectRepository, "UserModel");
+
+    if (typeof req.body !== "undefined" && typeof req.body["forgot-password"] !== "undefined" && typeof req.body.username !== "undefined") {
+        try {
+            const token = await UserModel.createPasswordResetToken(req.body.username);
+            return res.redirect(`/forgot-password-email?token=${token}`);
+        } catch (e) {
+            return next(e);
+        }
     }
 
     next();
-};
+});
 

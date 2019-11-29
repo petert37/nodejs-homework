@@ -3,6 +3,7 @@ const rents = require("./rents");
 const clients = require("./clients");
 
 const renderMW = require("../middlewares/renderMW");
+const errorRenderMW = require("../middlewares/errorRenderMW");
 const redirectMW = require("../middlewares/redirectMW");
 const authMW = require("../middlewares/auth/authMW");
 const reverseAuthMW = require("../middlewares/auth/reverseAuthMW");
@@ -11,7 +12,7 @@ const logoutMW = require("../middlewares/auth/logoutMW");
 const registerMW = require("../middlewares/auth/registerMW");
 const passwordResetEmailMW = require("../middlewares/auth/passwordResetEmailMW");
 const generatePasswordResetEmailMW = require("../middlewares/auth/generatePasswordResetEmailMW");
-const checkPasswordResetTokenMW = require("../middlewares/auth/checkPasswordResetTokenMW");
+const checkPasswordResetTokenMW = require("../middlewares/auth/loadPasswordResetTokenMW");
 const resetPasswordMW = require("../middlewares/auth/resetPasswordMW");
 
 const CarModel = require("../models/car-model");
@@ -39,6 +40,7 @@ module.exports = function (app) {
     app.post("/login",
         passwordResetEmailMW(objectRepository),
         loginMW(objectRepository),
+        errorRenderMW(objectRepository, "login"),
         redirectMW(objectRepository, "/cars")
     );
     app.post("/logout",
@@ -52,6 +54,7 @@ module.exports = function (app) {
     );
     app.post("/register",
         registerMW(objectRepository),
+        errorRenderMW(objectRepository, "register"),
         redirectMW(objectRepository, "/cars")
     );
     app.get("/forgot-password-email",
@@ -64,6 +67,7 @@ module.exports = function (app) {
     );
     app.post("/reset-password",
         resetPasswordMW(objectRepository),
+        errorRenderMW(objectRepository, "reset-password"),
         redirectMW(objectRepository, "/login")
     );
 

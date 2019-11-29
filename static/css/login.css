@@ -49,3 +49,18 @@ body {
     text-decoration: underline;
     float: right;
 }
+
+.login-box .login-form {
+    position: relative;
+    padding-bottom: 2.375rem;
+}
+
+.login-box .login-form .login-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.login-box .alert {
+    margin-top: 1rem;
+}

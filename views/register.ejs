@@ -13,7 +13,7 @@
         <h1>Regisztráció</h1>
         <a class="text-body font-weight-bold" href="/login">Bejelentkezés</a>
     </div>
-    <form method="post">
+    <form class="login-form" method="post">
         <div class="form-group">
             <label for="username">Felhasználónév</label>
             <input type="text" autocomplete="username" class="form-control" id="username" name="username" placeholder="Felhasználónév">
@@ -24,6 +24,11 @@
         </div>
         <button type="submit" class="btn btn-primary">Regisztrálás</button>
     </form>
+    <% if (typeof error !== "undefined") { %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+    <% } %>
 </div>
 <div class="placeholder"></div>
 <%- include('footer') -%>

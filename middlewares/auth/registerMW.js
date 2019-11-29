@@ -1,5 +1,5 @@
 /*
-* Created a new user with the provided name and password, then redirects to '/cars'
+* Created a new user with the provided name and password
 */
 const requireOption = require('../requireOption');
 const wrapAsync = require('../wrapAsyncMW');
@@ -23,7 +23,11 @@ module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
 
         res.locals.username = req.session.username;
     } catch (e) {
-        return next(e);
+        if (e === "User already exists" || e === "Invalid username" || e === "Invalid password") {
+            res.locals.error = e;
+        } else {
+            return next(e);
+        }
     }
 
     next();

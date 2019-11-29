@@ -14,6 +14,22 @@ module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
         typeof req.body.year === "undefined" ||
         typeof req.body.plateNumber === "undefined"
     ) {
+        res.locals.error = "Invalid input data";
+        return next();
+    }
+
+    if (isNaN(parseInt(req.body.year, 10))) {
+        res.locals.error = "Invalid year";
+        return next();
+    }
+
+    if (req.body.model.length === 0) {
+        res.locals.error = "Invalid model";
+        return next();
+    }
+
+    if (req.body.plateNumber.length === 0) {
+        res.locals.error = "Invalid plate number";
         return next();
     }
 
@@ -22,7 +38,7 @@ module.exports = (objectRepository) => wrapAsync(async (req, res, next) => {
     }
 
     res.locals.car.model = req.body.model;
-    res.locals.car.year = req.body.year;
+    res.locals.car.year = parseInt(req.body.year, 10);
     res.locals.car.plateNumber = req.body.plateNumber;
 
     try {

@@ -48,6 +48,11 @@
                     <input type="text" class="form-control" id="end-time" placeholder="Dátum, pl: 2019-10-15 17:35" name="endDate"
                            value="<%= (typeof rentDetails !== "undefined" && typeof rentDetails.endDate !== "undefined") ? rentDetails.endDate : ((typeof rent === "undefined") ? "" : formattedEndDate) %>">
                 </div>
+                <% if (typeof error !== "undefined") { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                <% } %>
             </div>
             <div class="actions my-3">
                 <button type="submit" class="btn btn-light mr-3" name="cancel">Mégse</button>

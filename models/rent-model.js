@@ -65,10 +65,32 @@ async function loadRentData(rent) {
     return {rent, car, client, formattedStartDate, formattedEndDate};
 }
 
+async function isCarFree(rentId, carId, startDate, endDate) {
+    const conditions = {
+        carId: carId,
+        $or: [
+            {startDate: {$gte: startDate, $lte: endDate}},
+            {endDate: {$gte: startDate, $lte: endDate}},
+        ]
+    };
+    if (typeof rentId !== "undefined") {
+        conditions._id = {$ne: rentId};
+    }
+    const rent = await RentDBModel.findOne(conditions).exec();
+    if (rent == null) {
+        return {free: true, message: null};
+    } else {
+        const formattedStartDate = rent.startDate.toLocaleDateString("hu-HU", dateFormat);
+        const formattedEndDate = rent.endDate.toLocaleDateString("hu-HU", dateFormat);
+        return {free: false, message: `Car is already rented from ${formattedStartDate} to ${formattedEndDate}`};
+    }
+}
+
 module.exports = {
     newRent,
     getRent,
     getRents,
     saveRent,
-    deleteRent
+    deleteRent,
+    isCarFree
 };

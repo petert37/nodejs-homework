@@ -34,6 +34,11 @@
                     <input type="text" class="form-control" id="plate-number" placeholder="Rendszám" name="plateNumber"
                            value="<%= (typeof car === "undefined") ? "" : car.plateNumber %>">
                 </div>
+                <% if (typeof error !== "undefined") { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                <% } %>
             </div>
             <div class="actions my-3">
                 <button type="submit" class="btn btn-light mr-3" name="cancel">Mégse</button>

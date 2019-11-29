@@ -1,6 +1,7 @@
 const express = require("express");
 
 const renderMW = require("../middlewares/renderMW");
+const errorRenderMW = require("../middlewares/errorRenderMW");
 const redirectMW = require("../middlewares/redirectMW");
 const getCarMW = require("../middlewares/cars/getCarMW");
 const getCarsMW = require("../middlewares/cars/getCarsMW");
@@ -21,6 +22,7 @@ module.exports = (objectRepository) => {
     router.post("/new",
         buttonRedirectMW(objectRepository, "cancel", "/cars"),
         saveCarMW(objectRepository),
+        errorRenderMW(objectRepository, "edit-car"),
         redirectMW(objectRepository, "/cars")
     );
     router.get("/edit/:carId",
@@ -31,6 +33,7 @@ module.exports = (objectRepository) => {
         buttonRedirectMW(objectRepository, "cancel", "/cars"),
         getCarMW(objectRepository),
         saveCarMW(objectRepository),
+        errorRenderMW(objectRepository, "edit-car"),
         redirectMW(objectRepository, "/cars")
     );
     router.post("/delete/:carId",

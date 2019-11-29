@@ -1,6 +1,7 @@
 const express = require("express");
 
 const renderMW = require("../middlewares/renderMW");
+const errorRenderMW = require("../middlewares/errorRenderMW");
 const redirectMW = require("../middlewares/redirectMW");
 const getRentMW = require("../middlewares/rents/getRentMW");
 const getRentsMW = require("../middlewares/rents/getRentsMW");
@@ -32,6 +33,7 @@ module.exports = (objectRepository) => {
         storeRentDetailsMW(objectRepository, req => `/rents/edit/${req.params.rentId}/clients`),
         getRentMW(objectRepository),
         saveRentMW(objectRepository),
+        errorRenderMW(objectRepository, "edit-rent"),
         redirectMW(objectRepository, "/rents")
     );
     router.get("/edit/:rentId/clients",
@@ -56,7 +58,9 @@ module.exports = (objectRepository) => {
     router.post("/new/:carId",
         buttonRedirectMW(objectRepository, "cancel", "/rents"),
         storeRentDetailsMW(objectRepository, req => `/rents/new/${req.params.carId}/clients`),
+        getCarMW(objectRepository),
         saveRentMW(objectRepository),
+        errorRenderMW(objectRepository, "edit-rent"),
         redirectMW(objectRepository, "/rents")
     );
     router.get("/new/:carId/clients",

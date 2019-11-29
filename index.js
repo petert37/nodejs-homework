@@ -27,7 +27,13 @@ setUpRoutes(app);
 
 app.use((err, req, res, next) => {
     console.error(err);
-    res.end("Something went wrong...");
+    let errorMessage = "Something went wrong...";
+    if (res.locals.error != null) {
+        errorMessage += "\n" + res.locals.error;
+    } else if (typeof err === "string") {
+        errorMessage += "\n" + err;
+    }
+    res.end(errorMessage);
 });
 
 const port = process.env.PORT || 3000;

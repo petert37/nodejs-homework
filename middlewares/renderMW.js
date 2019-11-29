@@ -1,6 +1,5 @@
 /*
 * Renders the specified view
-* Currently it only redirects to a given html file
 */
 module.exports = (objectRepository, view) => (req, res, next) => {
     if (view != null && view.endsWith(".html")) {
